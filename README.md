@@ -1,4 +1,10 @@
-# Material template
+# DevOps with Kubernetes 2024
+
+The course website: [https://devopswithkubernetes.com/](https://devopswithkubernetes.com/)
+
+This is a Vietnamese translation of the course with the help of **GPT-4.1**.
+
+## Material template
 
 This repository contains both the source code of this course's webpage and the source for the content of the course. The content is located in the `data` folder and everything else is for the website.
 

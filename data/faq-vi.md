@@ -4,7 +4,7 @@ title: "Câu hỏi thường gặp"
 hidden: false
 information_page: true
 sidebar_priority: -1000
-separator_after: "Material"
+# separator_after: "Material"
 ---
 
 <table-of-contents></table-of-contents>
