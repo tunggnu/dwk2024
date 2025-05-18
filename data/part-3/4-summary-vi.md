@@ -1,5 +1,5 @@
 ---
-path: "/part-3/4-summary"
+path: "/part-3/4-summary-vi"
 title: "Tóm tắt"
 hidden: false
 ---

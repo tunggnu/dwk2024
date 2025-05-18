@@ -1,5 +1,5 @@
 ---
-path: "/part-4/2-messaging-systems"
+path: "/part-4/2-messaging-systems-vi"
 title: "Hệ thống nhắn tin"
 hidden: false
 ---

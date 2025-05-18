@@ -1,5 +1,5 @@
 ---
-path: "/part-4/1-update-strategies-and-prometheus"
+path: "/part-4/1-update-strategies-and-prometheus-vi"
 title: "Chiến lược cập nhật và Prometheus"
 hidden: false
 ---

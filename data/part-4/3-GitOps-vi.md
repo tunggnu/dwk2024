@@ -1,6 +1,6 @@
 ---
-path: "/part-4/3-gitops"
-title: "GitOps"
+path: "/part-4/3-gitops-vi"
+title: "Triển khai GitOps"
 hidden: false
 ---
 
