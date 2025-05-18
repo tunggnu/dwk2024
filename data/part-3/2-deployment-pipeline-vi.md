@@ -78,7 +78,7 @@ spec:
 
 Tiếp theo, để kiểm tra manifest, hãy triển khai nó vào cụm của chúng ta. Ở trên tôi đã đẩy image đã build bằng `docker push`.
 
-```console
+```shell
 $ kubectl apply -f manifests/service.yaml
 $ kubectl apply -f manifests/deployment.yaml
 ```
@@ -103,7 +103,7 @@ resources:
 
 Bây giờ chúng ta có thể triển khai bằng cờ `-k` để chỉ định sử dụng Kustomize.
 
-```console
+```shell
 $ kubectl apply -k .
 ```
 
@@ -131,7 +131,7 @@ containers:
 
 Kiểm tra mọi thứ hoạt động
 
-```console
+```shell
 $ kubectl kustomize .
   ...
     spec:
@@ -223,7 +223,7 @@ Cấp các quyền sau cho tài khoản dịch vụ:
 
 Sau khi tạo tài khoản dịch vụ cho GKE tên "github-actions", tôi tạo khóa bằng gcloud:
 
-```console
+```shell
 $ gcloud iam service-accounts keys create ./private-key.json --iam-account=github-actions@dwk-gke-331210.iam.gserviceaccount.com
 ```
 
@@ -372,7 +372,7 @@ Chúng ta muốn triển khai mỗi nhánh vào một namespace riêng để m�
 
 Namespace có thể thay đổi với kustomize:
 
-```console
+```shell
 kustomize edit set namespace ${GITHUB_REF#refs/heads/}
 ```
 
@@ -380,13 +380,13 @@ Với lệnh này, tên namespace sẽ bằng tên nhánh.
 
 Nếu namespace chưa tồn tại, lệnh sẽ báo lỗi, nên cần tạo namespace:
 
-```console
+```shell
 kubectl create namespace ${GITHUB_REF#refs/heads/} || true
 ```
 
 Chúng ta cũng cần đặt namespace cho context:
 
-```console
+```shell
 kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
 ```
 

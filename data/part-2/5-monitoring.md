@@ -24,14 +24,14 @@ Installation instructions for Helm are found [here](https://helm.sh/docs/intro/i
 
 After the installation, we can add the official charts repository:
 
-```console
+```shell
 $ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 $ helm repo add stable https://charts.helm.sh/stable
 ```
 
 Next, we can install the [kube-prometheus-stack](https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack). By default, this would put everything in the default namespace. Let's create a new namespace and add it there.
 
-```console
+```shell
 $ kubectl create namespace prometheus
 $ helm install prometheus-community/kube-prometheus-stack --generate-name --namespace prometheus
 ...
@@ -51,7 +51,7 @@ You can remove almost anything with `helm delete [name]` with the name found usi
 
 Let us open a way into Grafana so we can see the data.
 
-```console
+```shell
 $ kubectl get po -n prometheus
  NAME                                                              READY   STATUS    RESTARTS   AGE
  kube-prometheus-stack-1602180058-prometheus-node-exporter-nt8cp   1/1     Running   0          53s
@@ -78,7 +78,7 @@ To confirm that everything works we should have an application that'll output so
 
 The [Loki-stack Chart](https://github.com/grafana/helm-charts/tree/main/charts/loki-stack) includes everything we need:
 
-```console
+```shell
 $ helm repo add grafana https://grafana.github.io/helm-charts
 $ helm repo update
 $ kubectl create namespace loki-stack

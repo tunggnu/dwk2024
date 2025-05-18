@@ -44,7 +44,7 @@ Cài đặt thành phần Knative Serving vào cụm k3d của bạn.
 
 Để Knative hoạt động trên k3d, bạn cần tạo cụm không có Traefik:
 
-```console
+```shell
 $ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2 --k3s-arg "--disable=traefik@server:0"
 ```
 

@@ -24,7 +24,7 @@ Hãy sử dụng [pixabay](https://pixabay.com/) để hiển thị ảnh trên 
 
 Các manifest của ứng dụng ở [đây](https://github.com/kubernetes-hy/material-example/tree/master/app4/manifests). Hãy khởi động app với service và ingress:
 
-```console
+```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app4/manifests/deployment.yaml \
                 -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app4/manifests/ingress.yaml \
                 -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app4/manifests/service.yaml
@@ -170,7 +170,7 @@ Nếu muốn mã hóa file cho cả nhóm, bạn cần thêm danh sách public k
 
 Bạn có thể giải mã file đã mã hóa bằng cách export biến môi trường _SOPS_AGE_KEY_FILE_ trỏ tới file key.txt và chạy sops với cờ --decrypt.
 
-```console
+```shell
 $ export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
 
 $ sops --decrypt secret.enc.yaml > secret.yaml
@@ -178,7 +178,7 @@ $ sops --decrypt secret.enc.yaml > secret.yaml
 
 Bạn cũng có thể apply file secret yaml qua pipe trực tiếp, giúp tránh tạo file secret.yaml dạng plain:
 
-```console
+```shell
 $ sops --decrypt secret.enc.yaml | kubectl apply -f -
 ```
 
@@ -229,7 +229,7 @@ Tạo một ConfigMap cho ứng dụng "Log output". ConfigMap này nên định
 
 Ứng dụng nên mount file này làm volume, đặt biến môi trường và in nội dung của chúng cùng với output thông thường:
 
-```plaintext
+```text
 file content: this text is from file
 env variable: MESSAGE=hello world
 2024-03-30T12:15:17.705Z: 8523ecb1-c716-4cb6-a044-b9e83bb98e43.

@@ -124,7 +124,7 @@ HorizontalPodAutoscaler sẽ tự động scale pod theo chiều ngang. File yam
 
 Hãy thử xem điều gì xảy ra:
 
-```console
+```shell
 $ kubectl top pod -l app=cpushredder
   NAME                               CPU(cores)   MEMORY(bytes)
   cpushredder-dep-85f5b578d7-nb5rs   1m           20Mi
@@ -140,7 +140,7 @@ $ kubectl get svc
 
 Mở external-ip ở trên, ví dụ http://35.228.149.206, trên trình duyệt sẽ bắt đầu một tiến trình tốn CPU. Làm mới trang vài lần, nếu bạn gửi request vượt quá giới hạn thì pod sẽ bị dừng.
 
-```console
+```shell
 $ kubectl logs -f cpushredder-dep-85f5b578d7-nb5rs
   Started in port 3001
   Received a request
@@ -185,7 +185,7 @@ Tìm hiểu autoscale với HorizontalPodAutoscaler có thể là một trong nh
 
 Scaling node là một tính năng được hỗ trợ trong GKE. Với cluster autoscaling, chúng ta có thể sử dụng đúng số node cần thiết.
 
-```console
+```shell
 $ gcloud container clusters update dwk-cluster --zone=europe-north1-b --enable-autoscaling --min-nodes=1 --max-nodes=5
   Updated [https://container.googleapis.com/v1/projects/dwk-gke/zones/europe-north1-b/clusters/dwk-cluster].
   To inspect the contents of your cluster, go to: https://console.cloud.google.com/kubernetes/workload_/gcloud/europe-north1-b/dwk-cluster?project=dwk-gke

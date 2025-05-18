@@ -284,7 +284,7 @@ spec:
 
 Apply the above and check it's running:
 
-```console
+```shell
 $ kubectl get po
   NAME                                READY   STATUS    RESTARTS   AGE
   postgres-ss-0                       1/1     Running   0          65s
@@ -311,7 +311,7 @@ spec:
 
 Pods have a few available configurations. For example, we can force it to retry for a number of times by defining `backoffLimit`.
 
-```console
+```shell
 $ kubectl get jobs
   NAME     COMPLETIONS   DURATION   AGE
   backup   1/1           7s         35s
@@ -336,4 +336,3 @@ $ kubectl logs backup-wj9r5
   https://en.wikipedia.org/wiki/Special:Random responds with a redirect to a random Wikipedia page so you can ask it to provide a random article for you to read. TIP: Check location header
 
 </exercise>
-

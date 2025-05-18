@@ -32,7 +32,7 @@ Let's test these tools and experiment using Lens. You will likely face a real de
 
 Let's deploy the application and see what's going on.
 
-```console
+```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app1/manifests/deployment.yaml
   deployment.apps/hashgenerator-dep created
 
@@ -74,7 +74,7 @@ There's a lot of information we are not ready to evaluate yet. Take a moment to 
 
 The command `describe` can be used for other resources as well. Let's see the pod next:
 
-```console
+```shell
 $ kubectl describe pod hashgenerator-dep-75bdcc94c-whwsm
   ...
   Events:
@@ -91,7 +91,7 @@ There's again a lot of information but let's focus on the events this time. Here
 
 Next, let's check that the application is actually doing what it should by reading the logs.
 
-```console
+```shell
 $ kubectl logs hashgenerator-dep-75bdcc94c-whwsm
   jst944
   3c2xas

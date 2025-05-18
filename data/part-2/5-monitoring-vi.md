@@ -24,14 +24,14 @@ Hướng dẫn cài đặt Helm có tại [đây](https://helm.sh/docs/intro/ins
 
 Sau khi cài đặt, chúng ta có thể thêm repository chart chính thức:
 
-```console
+```shell
 $ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 $ helm repo add stable https://charts.helm.sh/stable
 ```
 
 Tiếp theo, chúng ta có thể cài đặt [kube-prometheus-stack](https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack). Mặc định, mọi thứ sẽ được cài vào namespace mặc định. Hãy tạo một namespace mới và cài vào đó.
 
-```console
+```shell
 $ kubectl create namespace prometheus
 $ helm install prometheus-community/kube-prometheus-stack --generate-name --namespace prometheus
 ...
@@ -51,7 +51,7 @@ Bạn có thể xóa gần như mọi thứ với `helm delete [name]` với tê
 
 Hãy mở đường truy cập vào Grafana để xem dữ liệu.
 
-```console
+```shell
 $ kubectl get po -n prometheus
  NAME                                                              READY   STATUS    RESTARTS   AGE
  kube-prometheus-stack-1602180058-prometheus-node-exporter-nt8cp   1/1     Running   0          53s
@@ -78,7 +78,7 @@ Các dashboard đã hiển thị rất nhiều thông tin thú vị về cụm n
 
 [Loki-stack Chart](https://github.com/grafana/helm-charts/tree/main/charts/loki-stack) bao gồm mọi thứ cần thiết:
 
-```console
+```shell
 $ helm repo add grafana https://grafana.github.io/helm-charts
 $ helm repo update
 $ kubectl create namespace loki-stack

@@ -63,7 +63,7 @@ Each node has also the [Container Runtime](https://kubernetes.io/docs/setup/prod
 
 In addition to all of the previously mentioned, Kubernetes has [Addons](https://kubernetes.io/docs/concepts/cluster-administration/addons/) that use the same Kubernetes resources we've been using and extend Kubernetes. You can view which resources the addons have created in the `kube-system` namespace.
 
-```console
+```shell
 $ kubectl -n kube-system get all
   NAME                                                            READY   STATUS    RESTARTS   AGE
   pod/event-exporter-v0.2.5-599d65f456-vh4st                      2/2     Running   0          5h42m
@@ -129,7 +129,7 @@ Back in [part 1](/part-1), we talked a little about the "self-healing" nature of
 
 Let's see what happens if we delete a node that has a pod in it. Let's first deploy the pod, a web application with ingress from part 1, confirm that it's running and then see which pod has it running.
 
-```console
+```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app2/manifests/deployment.yaml \
                 -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app2/manifests/ingress.yaml \
                 -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app2/manifests/service.yaml
@@ -146,7 +146,7 @@ $ kubectl describe po hashresponse-dep-57bcc888d7-5gkc9 | grep 'Node:'
 
 In this case it's in agent-1. Let's make the node go "offline" with pause:
 
-```console
+```shell
 $ docker ps
   CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS              PORTS                                           NAMES
   5c43fe0a936e        rancher/k3d-proxy:v3.0.0   "/bin/sh -c nginx-pr…"   10 days ago         Up 2 hours          0.0.0.0:8081->80/tcp, 0.0.0.0:50207->6443/tcp   k3d-k3s-default-serverlb
@@ -160,7 +160,7 @@ k3d-k3s-default-agent-1
 
 Now wait for a while and this should be the new state:
 
-```console
+```shell
 $ kubectl get po
 NAME                                READY   STATUS        RESTARTS   AGE
 hashresponse-dep-57bcc888d7-5gkc9   1/1     Terminating   0          15m
@@ -173,4 +173,3 @@ $ curl localhost:8081
 What did just happen? Read [this explanation on how kubernetes handles offline nodes](https://dev.to/duske/how-kubernetes-handles-offline-nodes-53b5)
 
 Well then, what happens if you delete the only control-plane node? Nothing good. In our local cluster it's our single point of failure. See Kubernetes documentation for "[Options for Highly Available topology](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/ha-topology/)" to avoid getting the whole cluster crippled by a single faulty hardware.
-

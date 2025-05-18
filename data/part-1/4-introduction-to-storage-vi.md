@@ -182,13 +182,13 @@ spec:
 
 Và apply cùng với persistentvolume.yaml và persistentvolumeclaim.yaml.
 
-```console
+```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app3/manifests/deployment-persistent.yaml
 ```
 
 Với service và ingress trước đó, chúng ta có thể truy cập ứng dụng tại http://localhost:8081. Để xác nhận dữ liệu được lưu bền, hãy chạy
 
-```console
+```shell
 $ kubectl delete -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app3/manifests/deployment-persistent.yaml
   deployment.apps "images-dep" đã bị xóa
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app3/manifests/deployment-persistent.yaml
@@ -211,7 +211,7 @@ Hãy chia sẻ dữ liệu giữa hai ứng dụng "Ping-pong" và "Log output" 
 
 Lưu số lượng request gửi đến ứng dụng "Ping-pong" vào một file trong volume và xuất ra cùng với timestamp và hash khi gửi request đến ứng dụng "Log output". Cuối cùng, hai pod nên chia sẻ một persistent volume giữa hai ứng dụng. Khi truy cập ứng dụng "Log output" trên trình duyệt, bạn sẽ thấy:
 
-```plaintext
+```text
 2020-03-30T12:15:17.705Z: 8523ecb1-c716-4cb6-a044-b9e83bb98e43.
 Ping / Pongs: 3
 ```

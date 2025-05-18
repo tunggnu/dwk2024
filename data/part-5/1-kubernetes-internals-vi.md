@@ -67,7 +67,7 @@ Mỗi node cũng có [Container Runtime](https://kubernetes.io/docs/setup/produc
 
 Ngoài các thành phần trên, Kubernetes còn có [Addons](https://kubernetes.io/docs/concepts/cluster-administration/addons/) sử dụng các resource Kubernetes quen thuộc để mở rộng chức năng. Bạn có thể xem các resource mà addon tạo ra trong namespace `kube-system`.
 
-```console
+```shell
 $ kubectl -n kube-system get all
   NAME                                                            READY   STATUS    RESTARTS   AGE
   pod/event-exporter-v0.2.5-599d65f456-vh4st                      2/2     Running   0          5h42m
@@ -133,7 +133,7 @@ $ kubectl -n kube-system get all
 
 Hãy xem điều gì xảy ra nếu chúng ta xóa một node đang chạy pod. Đầu tiên hãy triển khai pod, một ứng dụng web với ingress từ phần 1, xác nhận nó đang chạy và xem pod đó đang chạy trên node nào.
 
-```console
+```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app2/manifests/deployment.yaml \
                 -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app2/manifests/ingress.yaml \
                 -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app2/manifests/service.yaml
@@ -150,7 +150,7 @@ $ kubectl describe po hashresponse-dep-57bcc888d7-5gkc9 | grep 'Node:'
 
 Trong trường hợp này pod chạy trên agent-1. Hãy làm node này "offline" bằng lệnh pause:
 
-```console
+```shell
 $ docker ps
   CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS              PORTS                                           NAMES
   5c43fe0a936e        rancher/k3d-proxy:v3.0.0   "/bin/sh -c nginx-pr…"   10 days ago         Up 2 hours          0.0.0.0:8081->80/tcp, 0.0.0.0:50207->6443/tcp   k3d-k3s-default-serverlb
@@ -164,7 +164,7 @@ k3d-k3s-default-agent-1
 
 Bây giờ chờ một lúc và trạng thái mới sẽ như sau:
 
-```console
+```shell
 $ kubectl get po
 NAME                                READY   STATUS        RESTARTS   AGE
 hashresponse-dep-57bcc888d7-5gkc9   1/1     Terminating   0          15m

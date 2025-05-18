@@ -53,7 +53,7 @@ spec:
           image: jakousa/dwk-app8:v1
 ```
 
-```console
+```shell
 $ kubectl apply -f deployment.yaml
   deployment.apps/flaky-update-dep created
 
@@ -67,7 +67,7 @@ $ kubectl get po
 
 Now change the tag to v2 and apply it.
 
-```console
+```shell
 $ kubectl apply -f deployment.yaml
 $ kubectl get po --watch
 ...
@@ -113,7 +113,7 @@ spec:
 
 Here the *initialDelaySeconds* and *periodSeconds* will mean that the probe is sent 10 seconds after the container is up and every 5 seconds after that. Now if we change the tag to v2 and apply it, the result will look like this:
 
-```console
+```shell
 $ kubectl apply -f deployment.yaml
   deployment.apps/flaky-update-dep configured
 
@@ -177,7 +177,7 @@ There is a lesson to learn:
 
   Test that it works by applying everything but the database statefulset. The output of `kubectl get po` should look like this before the database is available:
 
-  ```console
+  ```shell
 NAME                             READY   STATUS    RESTARTS   AGE
 logoutput-dep-7f49547cf4-ttj4f   1/2     Running   0          21s
 pingpong-dep-9b698d6fb-jdgq9     0/1     Running   0          21s
@@ -189,14 +189,14 @@ pingpong-dep-9b698d6fb-jdgq9     0/1     Running   0          21s
 
 Even though v2 didn't work, at least the application is working. We can just push a new update on top of the v2. Let's try the v4 which should break after a short while:
 
-```console
+```shell
 $ kubectl apply -f deployment.yaml
   deployment.apps/flaky-update-dep configured
 ```
 
 Now the ReadinessProbe may pass for the first 20 seconds, but soon enough every pod will break. Unfortunately *ReadinessProbe* cannot do anything about it, the deployment was successful but the application is buggy.
 
-```console
+```shell
 $ kubectl get po
   NAME                               READY   STATUS    RESTARTS   AGE
   flaky-update-dep-dd78944f4-vv27w   0/1     Running   0          111s
@@ -207,14 +207,14 @@ $ kubectl get po
 
 Let's roll back to the previous version. This may come in handy, if you ever are in a panic mode and need to roll an update back:
 
-```console
+```shell
 $ kubectl rollout undo deployment flaky-update-dep
   deployment.apps/flaky-update-dep rolled back
 ```
 
 This will roll back into the previous version. Since it was v2, which doesn't work, we need to use a flag with the undo:
 
-```console
+```shell
 $ kubectl describe deployment flaky-update-dep | grep Image
     Image:        jakousa/dwk-app8:v2
 
@@ -265,14 +265,14 @@ spec:
 
 With this let's just deploy the worst of the versions, v3.
 
-```console
+```shell
 $ kubectl apply -f deployment.yaml
   deployment.apps/flaky-update-dep configured
 ```
 
 After a while, it may look something like this (if you're lucky).
 
-```console
+```shell
 $ kubectl get po
   NAME                                READY   STATUS    RESTARTS   AGE
   flaky-update-dep-fd65cd468-4vgwx   1/1     Running   3          2m30s
@@ -299,7 +299,7 @@ With rolling updates, when including the Probes, we could create releases with n
 
 At the moment of writing this, Canary is not a strategy for deployments that Kubernetes would provide out of the box. This may be due to the ambiguity of the methods for canary release. We will use [Argo Rollouts](https://argoproj.github.io/argo-rollouts/) to test one type of canary release:
 
-```console
+```shell
 $ kubectl create namespace argo-rollouts
 $ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
 ```
@@ -378,7 +378,7 @@ The analysis will be using a template called _restart-rate_. Next, we have to de
 
   Start now Prometheus with Helm and use port-forward to access the GUI website. Port 9090 is the default for Prometheus:
 
-```console
+```shell
 $ kubectl -n prometheus get pods
  NAME                                                              READY   STATUS    RESTARTS   AGE
   alertmanager-kube-prometheus-stack-1714-alertmanager-0            2/2     Running   0          3h19m
@@ -464,4 +464,3 @@ Kubernetes supports [Recreate](https://kubernetes.io/docs/concepts/workloads/con
   It should be a PUT request to `/todos/<id>`.
 
 </exercise>
-

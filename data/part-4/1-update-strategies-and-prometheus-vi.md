@@ -53,7 +53,7 @@ spec:
           image: jakousa/dwk-app8:v1
 ```
 
-```console
+```shell
 $ kubectl apply -f deployment.yaml
   deployment.apps/flaky-update-dep created
 
@@ -67,7 +67,7 @@ $ kubectl get po
 
 Bây giờ hãy đổi tag thành v2 và áp dụng lại.
 
-```console
+```shell
 $ kubectl apply -f deployment.yaml
 $ kubectl get po --watch
 ...
@@ -113,7 +113,7 @@ spec:
 
 Ở đây _initialDelaySeconds_ và _periodSeconds_ nghĩa là probe sẽ gửi sau 10 giây khi container khởi động và sau đó mỗi 5 giây. Nếu đổi tag thành v2 và áp dụng, kết quả sẽ như sau:
 
-```console
+```shell
 $ kubectl apply -f deployment.yaml
   deployment.apps/flaky-update-dep configured
 
@@ -176,7 +176,7 @@ Và một ReadinessProbe khác cho ứng dụng Log output. Nó chỉ sẵn sàn
 
 Kiểm tra bằng cách áp dụng mọi thứ trừ statefulset của database. Kết quả `kubectl get po` sẽ như sau trước khi database sẵn sàng:
 
-```console
+```shell
 NAME                             READY   STATUS    RESTARTS   AGE
 logoutput-dep-7f49547cf4-ttj4f   1/2     Running   0          21s
 pingpong-dep-9b698d6fb-jdgq9     0/1     Running   0          21s
@@ -188,14 +188,14 @@ Thêm database sẽ tự động chuyển trạng thái READY thành 2/2 và 1/1
 
 Dù v2 không hoạt động, ít nhất ứng dụng vẫn chạy. Chúng ta chỉ cần đẩy bản cập nhật mới lên v2. Hãy thử v4, bản này sẽ hỏng sau một thời gian ngắn:
 
-```console
+```shell
 $ kubectl apply -f deployment.yaml
   deployment.apps/flaky-update-dep configured
 ```
 
 ReadinessProbe có thể pass trong 20 giây đầu, nhưng sau đó mọi pod sẽ hỏng. Đáng tiếc _ReadinessProbe_ không thể làm gì, deployment thành công nhưng ứng dụng bị lỗi.
 
-```console
+```shell
 $ kubectl get po
   NAME                               READY   STATUS    RESTARTS   AGE
   flaky-update-dep-dd78944f4-vv27w   0/1     Running   0          111s
@@ -206,14 +206,14 @@ $ kubectl get po
 
 Hãy rollback về phiên bản trước. Điều này rất hữu ích nếu bạn cần rollback gấp:
 
-```console
+```shell
 $ kubectl rollout undo deployment flaky-update-dep
   deployment.apps/flaky-update-dep rolled back
 ```
 
 Lệnh này sẽ rollback về phiên bản trước. Nếu đó là v2 (không hoạt động), cần dùng thêm flag:
 
-```console
+```shell
 $ kubectl describe deployment flaky-update-dep | grep Image
     Image:        jakousa/dwk-app8:v2
 
@@ -264,14 +264,14 @@ spec:
 
 Bây giờ hãy triển khai phiên bản tệ nhất, v3.
 
-```console
+```shell
 $ kubectl apply -f deployment.yaml
   deployment.apps/flaky-update-dep configured
 ```
 
 Sau một lúc, có thể sẽ như sau (nếu bạn may mắn):
 
-```console
+```shell
 $ kubectl get po
   NAME                                READY   STATUS    RESTARTS   AGE
   flaky-update-dep-fd65cd468-4vgwx   1/1     Running   3          2m30s
@@ -298,7 +298,7 @@ Với rolling update và các Probe, chúng ta có thể phát hành không down
 
 Hiện tại, Canary không phải là chiến lược được Kubernetes hỗ trợ sẵn. Có thể do cách triển khai canary rất đa dạng. Chúng ta sẽ dùng [Argo Rollouts](https://argoproj.github.io/argo-rollouts/) để thử một kiểu canary release:
 
-```console
+```shell
 $ kubectl create namespace argo-rollouts
 $ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
 ```
@@ -377,7 +377,7 @@ Analysis sẽ dùng template _restart-rate_. Tiếp theo, cần định nghĩa c
 
 Khởi động Prometheus bằng Helm và dùng port-forward để truy cập giao diện web. Port mặc định là 9090:
 
-```console
+```shell
 $ kubectl -n prometheus get pods
  NAME                                                              READY   STATUS    RESTARTS   AGE
   alertmanager-kube-prometheus-stack-1714-alertmanager-0            2/2     Running   0          3h19m

@@ -76,13 +76,13 @@ Chúng ta sẽ sử dụng k3d để tạo một nhóm các container Docker ch�
 
 Vì các node là container nên chúng ta sẽ cần cấu hình một chút để chúng hoạt động như mong muốn. Chúng ta sẽ làm điều đó sau. Việc tạo cụm Kubernetes của riêng chúng ta với k3d chỉ cần một lệnh duy nhất.
 
-```console
+```shell
 $ k3d cluster create -a 2
 ```
 
 Lệnh này tạo ra một cụm Kubernetes với 2 agent node. Vì chúng nằm trong Docker, bạn có thể xác nhận sự tồn tại của chúng bằng `docker ps`.
 
-```console
+```shell
 $ docker ps
   CONTAINER ID   IMAGE                            COMMAND                  CREATED          STATUS          PORTS                             NAMES
   b25a9bb6c42f   ghcr.io/k3d-io/k3d-tools:5.4.1   "/app/k3d-tools noop"    56 seconds ago   Up 55 seconds                                     k3d-k3s-default-tools
@@ -100,7 +100,7 @@ Công cụ khác mà chúng ta sẽ sử dụng trong khóa học này là [kube
 
 Giờ kubectl sẽ có thể truy cập cụm
 
-```console
+```shell
 $ kubectl cluster-info
   Kubernetes control plane is running at https://0.0.0.0:50122
   CoreDNS is running at https://0.0.0.0:50122/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
@@ -111,7 +111,7 @@ Chúng ta có thể thấy kubectl đang kết nối đến container _k3d-k3s-d
 
 Nếu bạn muốn dừng / khởi động lại cụm, chỉ cần chạy
 
-```console
+```shell
 $ k3d cluster stop
   INFO[0000] Stopping cluster 'k3s-default'
   INFO[0011] Stopped cluster 'k3s-default'
@@ -161,7 +161,7 @@ Giờ chúng ta đã sẵn sàng để triển khai ứng dụng đầu tiên v�
 
 Để triển khai một ứng dụng, chúng ta cần tạo một đối tượng [deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) với image.
 
-```console
+```shell
 $ kubectl create deployment hashgenerator-dep --image=jakousa/dwk-app1
   deployment.apps/hashgenerator-dep created
 ```
@@ -181,7 +181,7 @@ _Pod_ là một lớp trừu tượng bao quanh một hoặc nhiều container. 
 
 Ví dụ, để có mô tả về Pod và các trường bắt buộc, chúng ta có thể dùng lệnh sau.
 
-```console
+```shell
 $ kubectl explain pod
   KIND:     Pod
   VERSION:  v1
@@ -192,7 +192,7 @@ $ kubectl explain pod
 
 Trong Kubernetes, tất cả các thực thể tồn tại đều được gọi là [object](https://kubernetes.io/docs/concepts/overview/working-with-objects/). Bạn có thể liệt kê tất cả object của một resource với `kubectl get RESOURCE`.
 
-```console
+```shell
 $ kubectl get pods
   NAME                               READY   STATUS    RESTARTS   AGE
   hashgenerator-dep-6965c5c7-2pkxc   1/1     Running   0          2m1s
@@ -206,7 +206,7 @@ Khi chúng ta tạo Deployment, chúng ta cũng tạo một object [ReplicaSet](
 
 Bạn có thể xem các deployment như sau:
 
-```console
+```shell
 $ kubectl get deployments
   NAME                READY   UP-TO-DATE   AVAILABLE   AGE
   hashgenerator-dep   1/1     1            1           54s
@@ -228,7 +228,7 @@ Một danh sách hữu ích các lệnh docker-cli được chuyển sang kubect
 
 Tạo một ứng dụng sinh ra một chuỗi ngẫu nhiên khi khởi động, lưu chuỗi này vào bộ nhớ, và xuất ra mỗi 5 giây kèm timestamp. Ví dụ:
 
-```plaintext
+```text
 2020-03-30T12:15:17.705Z: 8523ecb1-c716-4cb6-a044-b9e83bb98e43
 2020-03-30T12:15:22.705Z: 8523ecb1-c716-4cb6-a044-b9e83bb98e43
 ```
@@ -263,13 +263,13 @@ Tạo một web server xuất ra "Server started in port NNNN" khi khởi độn
 
 Chúng ta đã tạo deployment với
 
-```console
+```shell
 $ kubectl create deployment hashgenerator-dep --image=jakousa/dwk-app1
 ```
 
 Nếu muốn scale lên 4 lần và cập nhật image:
 
-```console
+```shell
 $ kubectl scale deployment/hashgenerator-dep --replicas=4
 
 $ kubectl set image deployment/hashgenerator-dep dwk-app1=jakousa/dwk-app1:b7fc18de2376da80ff0cfc72cf581a9f94d10e64
@@ -279,7 +279,7 @@ Mọi thứ bắt đầu trở nên rất rối rắm. Thật khó tưởng tư�
 
 Trước khi làm lại các bước trước bằng cách khai báo, hãy xóa deployment hiện tại.
 
-```console
+```shell
 $ kubectl delete deployment hashgenerator-dep
   deployment.apps "hashgenerator-dep" deleted
 ```
@@ -321,14 +321,14 @@ File này trông rất giống với các file docker-compose.yaml mà chúng ta
 
 Áp dụng deployment với lệnh apply:
 
-```console
+```shell
 $ kubectl apply -f manifests/deployment.yaml
   deployment.apps/hashgenerator-dep created
 ```
 
 Vậy là xong, nhưng để ôn lại, hãy xóa và tạo lại:
 
-```console
+```shell
 $ kubectl delete -f manifests/deployment.yaml
   deployment.apps "hashgenerator-dep" deleted
 
@@ -362,7 +362,7 @@ Lưu ý việc apply một deployment mới sẽ không cập nhật ứng dụn
 
 Quy trình cơ bản của bạn có thể như sau:
 
-```console
+```shell
 $ docker build -t <image>:<new_tag>
 
 $ docker push <image>:<new_tag>
@@ -370,6 +370,6 @@ $ docker push <image>:<new_tag>
 
 Sau đó chỉnh sửa deployment.yaml để tag được cập nhật thành \<new_tag\> và chạy lệnh sau
 
-```console
+```shell
 $ kubectl apply -f manifests/deployment.yaml
 ```

@@ -180,13 +180,13 @@ Modify the previously introduced deployment to use it:
 
 And apply it with persistentvolume.yaml and persistentvolumeclaim.yaml.
 
-```console
+```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app3/manifests/deployment-persistent.yaml
 ```
 
 With the previous service and ingress, we can access the app in http://localhost:8081. To confirm that the data is persistent we can run
 
-```console
+```shell
 $ kubectl delete -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app3/manifests/deployment-persistent.yaml
   deployment.apps "images-dep" deleted
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app3/manifests/deployment-persistent.yaml
@@ -209,7 +209,7 @@ If you are interested in learning more about running your own storage you can ch
 
   Save the number of requests to "Ping-pong" application into a file in the volume and output it with the timestamp and hash when sending a request to our "Log output" application. In the end, the two pods should share a persistent volume between the two applications. So the browser should display the following when accessing the "Log output" application:
 
-  ```plaintext
+  ```text
   2020-03-30T12:15:17.705Z: 8523ecb1-c716-4cb6-a044-b9e83bb98e43.
   Ping / Pongs: 3
   ```

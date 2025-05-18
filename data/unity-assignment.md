@@ -18,7 +18,7 @@ Shijun used the following helm chart to deploy Prometheus and Grafana (and all t
 
 In this helpful section from the kube-prometheus-stack [README](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#prometheusioscrape) we learned how to tell prometheus to scrape all "PodMonitorSelectors" and "ServiceMonitorSelector" CRDs:
 
-```console
+```shell
 helm upgrade --set prometheus.prometheusSpec.podMonitorSelectorNilUsesHelmValues=false --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false prometheus prometheus-community/kube-prometheus-stack
 ```
 

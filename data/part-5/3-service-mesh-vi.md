@@ -36,7 +36,7 @@ Linkerd có một công cụ CLI hỗ trợ, hãy làm theo [hướng dẫn bắ
 
 Hãy xem ứng dụng của chúng ta, lần này là ứng dụng microservice cho việc bình chọn emoji: [https://github.com/BuoyantIO/emojivoto](https://github.com/BuoyantIO/emojivoto).
 
-```console
+```shell
 $ kubectl apply -f https://raw.githubusercontent.com/BuoyantIO/emojivoto/main/kustomize/deployment/ns.yml \
                 -f https://raw.githubusercontent.com/BuoyantIO/emojivoto/main/kustomize/deployment/web.yml \
                 -f https://raw.githubusercontent.com/BuoyantIO/emojivoto/main/kustomize/deployment/emoji.yml \

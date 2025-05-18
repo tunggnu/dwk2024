@@ -54,7 +54,7 @@ The chart is [documentation](https://artifacthub.io/packages/helm/bitnami/nats) 
 Parameters can be set in the installation as follows:
 
 
-```console
+```shell
 $ helm install --set auth.enabled=false my-nats oci://registry-1.docker.io/bitnamicharts/nats
 
   NAME: my-nats
@@ -251,7 +251,7 @@ We still need a suitable label for our configuration so that Prometheus knows to
 
 Let's use the label that the already existing ServiceMonitors are using. We can check it with the following commands:
 
-```console
+```shell
 $ kubectl -n prometheus get prometheus
   NAME                                    VERSION   REPLICAS   AGE
   kube-prometheus-stack-1714-prometheus   v2.51.2   1          39h
@@ -274,7 +274,7 @@ kubectl label servicemonitors.monitoring.coreos.com -n prometheus my-nats-metric
 
 Now Prometheus should have access to the new data. Let's check Prometheus:
 
-```console
+```shell
 $ kubectl -n prometheus port-forward prometheus-kube-prometheus-stack-1714-prometheus-0 9090
 Forwarding from 127.0.0.1:9090 -> 9090
 Forwarding from [::1]:9090 -> 9090
@@ -290,7 +290,7 @@ We can now query the data:
 
 Also the Prometheus API should return a result:
 
-```console
+```shell
 $ curl http://localhost:9090/api/v1/query\?query\=gnatsd_connz_in_msgs
   {
     "status":"success",
@@ -323,7 +323,7 @@ If the result here is empty, then something is wrong. The result may be a succes
 
 Now we just need to add a Grafana dashboard for the data. Let's import a dashboard from [here](https://raw.githubusercontent.com/nats-io/prometheus-nats-exporter/5084a32850823b59069f21f3a7dde7e488fef1c6/walkthrough/grafana-nats-dash.json) instead of configuring our own.
 
-```console
+```shell
 $ kubectl -n prometheus port-forward kube-prometheus-stack-1602180058-grafana-59cd48d794-4459m 3000
 ```
 

@@ -89,7 +89,7 @@ spec:
 
 And then:
 
-```console
+```shell
 $ kubectl apply -f countdown.yaml
   countdown.stable.dwk/doomsday created
 
@@ -207,7 +207,7 @@ subjects:
 
 After deploying all of that we can check logs after applying a countdown. (You may have to delete the pod to have it restart in case it didn't have access and it got stuck)
 
-```console
+```shell
 $ kubectl logs countdown-controller-dep-7ff598ffbf-q2rp5
   > app10@1.0.0 start /usr/src/app
   > node index.js
@@ -257,4 +257,3 @@ Test that creating a DummySite resource with website_url "[https://example.com/]
   3. apply DummySite
 
 </exercise>
-

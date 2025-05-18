@@ -22,13 +22,13 @@ As you can imagine, there may be a lot of resources inside a cluster. In fact, a
 
 Accessing namespaces with kubectl is achieved by using the `-n` flag. For example, you can see what the namespace kube-system has with
 
-```console
+```shell
 $ kubectl get pods -n kube-system
 ```
 
 To see everything you can use `--all-namespaces`.
 
-```console
+```shell
 $ kubectl get all --all-namespaces
 ```
 
@@ -103,14 +103,14 @@ Grouping objects with labels is simple. We either add the label into the yaml fi
 
 We could e.g. add a label _importance=great_ to a pod as follows:
 
-```console
+```shell
 $ kubectl label po hashgenerator-dep-7b9b88f8bf-lvcv4 importance=great
   pod/hashgenerator-dep-7b9b88f8bf-lvcv4 labeled
 ```
 
 Labels can be used e.g. to limit the result of the command _kubectl get_:
 
-```console
+```shell
 $ kubectl get pod -l importance=great
   NAME                                 READY   STATUS    RESTARTS   AGE
   hashgenerator-dep-7b9b88f8bf-lvcv4   1/1     Running   0          17m
@@ -132,7 +132,7 @@ With labels, we can even move pods to labeled nodes. Let's say we have a few nod
 
 If you already have the pod running, it won't terminate the pod to avoid unwanted changes in the system, instead a new pod is scheduled:
 
-```console
+```shell
 $ kubectl get po
   NAME                                 READY   STATUS    RESTARTS   AGE
   hashgenerator-dep-548d4d6c8d-mbblj   1/1     Running   0          107s
@@ -155,4 +155,3 @@ $ kubectl get po
 _nodeSelector_ is a blunt tool. It's great when you want to define binary qualities, like _"don't run this application if the node is using an HDD instead of an SSD"_ by labeling the nodes according to disk types. There are more sophisticated tools you should use when you have a cluster of various machines, ranging from a [fighter jet](https://gcn.com/articles/2020/01/07/af-kubernetes-f16.aspx) to a toaster to a supercomputer. Kubernetes can use [affinity](https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes-using-node-affinity/) and _anti-affinity_ to select which nodes are prioritized for which applications and [taints with tolerances](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) so that a pod can avoid certain nodes. For example, if a machine has a high network latency and we wouldn't want it to do some latency-critical tasks.
 
 See [affinity and anti-affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) and [taints and tolerances](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for detailed information. We will not be assigning pods to specific nodes on this course, as we have a homogeneous cluster.
-

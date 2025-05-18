@@ -22,7 +22,7 @@ Let's develop our application so that it has an HTTP server responding with two 
 
 I've prepared one [here](https://github.com/kubernetes-hy/material-example/tree/master/app2). By default, it will listen on port 3000.
 
-```console
+```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app2/manifests/deployment.yaml
   deployment.apps/hashresponse-dep created
 ```
@@ -31,7 +31,7 @@ $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-hy/material-exam
 
 We can confirm that the hashresponse-dep is working with the `port-forward` command. Let's see the name of the pod first and then port forward there:
 
-```console
+```shell
 $ kubectl get po
   NAME                                READY   STATUS    RESTARTS   AGE
   hashgenerator-dep-5cbbf97d5-z2ct9   1/1     Running   0          20h
@@ -62,7 +62,7 @@ Because we are running our cluster inside Docker with k3d we will have to do som
 
 Opening a route from outside of the cluster to the pod will not be enough if we have no means of accessing the cluster inside the containers!
 
-```console
+```shell
 $ docker ps
   CONTAINER ID    IMAGE                      COMMAND                  CREATED             STATUS              PORTS                             NAMES
   b60f6c246ebb    ghcr.io/k3d-io/k3d-proxy:5 "/bin/sh -c nginx-pr…"   2 hours ago         Up 2 hours          80/tcp, 0.0.0.0:58264->6443/tcp   k3d-k3s-default-serverlb
@@ -75,7 +75,7 @@ After scrolling a bit right we see that K3d has helpfully prepared us the port 6
 
 K3d [documentation](https://k3d.io/v5.3.0/usage/commands/k3d_cluster_create/) tells us how the ports are opened, we'll open local 8081 to 80 in k3d-k3s-default-serverlb and local 8082 to 30080 in k3d-k3s-default-agent-0. The 30080 is chosen almost completely randomly, but needs to be a value between 30000-32767 for the next step:
 
-```console
+```shell
 $ k3d cluster delete
   INFO[0000] Deleting cluster 'k3s-default'
   ...
@@ -136,7 +136,7 @@ spec:
       targetPort: 3000 # This is the target port
 ```
 
-```console
+```shell
 $ kubectl apply -f manifests/service.yaml
   service/hashresponse-svc created
 ```
@@ -163,7 +163,7 @@ Ingresses are implemented by various different "controllers". This means that in
 
 Switching to Ingress will require us to create an Ingress resource. Ingress will route incoming traffic forward to a *Services*, but the old *NodePort* Service won't do.
 
-```console
+```shell
 $ kubectl delete -f manifests/service.yaml
   service "hashresponse-svc" deleted
 ```
@@ -216,7 +216,7 @@ spec:
 
 Then we can apply everything and view the result
 
-```console
+```shell
 $ kubectl apply -f manifests/
   ingress.networking.k8s.io/dwk-material-ingress created
   service/hashresponse-svc configured

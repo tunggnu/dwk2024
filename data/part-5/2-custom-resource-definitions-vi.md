@@ -91,7 +91,7 @@ spec:
 
 Và sau đó:
 
-```console
+```shell
 $ kubectl apply -f countdown.yaml
   countdown.stable.dwk/doomsday created
 
@@ -207,7 +207,7 @@ subjects:
 
 Sau khi deploy tất cả, có thể kiểm tra log sau khi apply countdown. (Có thể cần xóa pod để nó restart nếu trước đó chưa có quyền và bị treo)
 
-```console
+```shell
 $ kubectl logs countdown-controller-dep-7ff598ffbf-q2rp5
   > app10@1.0.0 start /usr/src/app
   > node index.js

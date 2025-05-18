@@ -22,13 +22,13 @@ Như bạn có thể tưởng tượng, có thể sẽ có rất nhiều tài ng
 
 Truy cập namespace với kubectl được thực hiện bằng cờ `-n`. Ví dụ, bạn có thể xem namespace kube-system có gì với
 
-```console
+```shell
 $ kubectl get pods -n kube-system
 ```
 
 Để xem tất cả mọi thứ, bạn có thể dùng `--all-namespaces`.
 
-```console
+```shell
 $ kubectl get all --all-namespaces
 ```
 
@@ -102,14 +102,14 @@ Nhóm các đối tượng bằng label rất đơn giản. Chúng ta chỉ cầ
 
 Ví dụ, chúng ta có thể thêm label _importance=great_ cho một pod như sau:
 
-```console
+```shell
 $ kubectl label po hashgenerator-dep-7b9b88f8bf-lvcv4 importance=great
   pod/hashgenerator-dep-7b9b88f8bf-lvcv4 labeled
 ```
 
 Label có thể được dùng để giới hạn kết quả của lệnh _kubectl get_:
 
-```console
+```shell
 $ kubectl get pod -l importance=great
   NAME                                 READY   STATUS    RESTARTS   AGE
   hashgenerator-dep-7b9b88f8bf-lvcv4   1/1     Running   0          17m
@@ -131,7 +131,7 @@ Với label, chúng ta thậm chí có thể di chuyển pod lên các node đã
 
 Nếu pod đã chạy rồi, nó sẽ không tự động dừng pod để tránh thay đổi không mong muốn, thay vào đó một pod mới sẽ được lên lịch:
 
-```console
+```shell
 $ kubectl get po
   NAME                                 READY   STATUS    RESTARTS   AGE
   hashgenerator-dep-548d4d6c8d-mbblj   1/1     Running   0          107s

@@ -17,7 +17,7 @@ Kubernetes cho phép bạn sử dụng cụm như thể nó là một máy tính
 
 Khi sử dụng Kubernetes, bạn có thể dùng lệnh kubectl để điều khiển cụm Kubernetes. Nó hoạt động với file cấu hình. Nếu dùng Azure, bạn có thể lấy file cấu hình bằng lệnh [az aks get-credentials](https://docs.microsoft.com/en-us/cli/azure/aks?view=azure-cli-latest#az_aks_get_credentials "‌"). Khi thực thi lệnh này, nó sẽ gửi yêu cầu tới cụm Kubernetes qua Rest API, tạo [một Pod](https://kubernetes.io/docs/concepts/workloads/pods/pod/#what-is-a-pod "‌"). Một pod có thể chứa một hoặc nhiều container bên trong. Kubernetes sẽ tải image từ [DockerHub](https://hub.docker.com/ "‌") hoặc [Azure Container Registry](https://azure.microsoft.com/nl-nl/services/container-registry/ "‌"). Cụm Kubernetes có nhiều node. Tuy nhiên, Kubernetes sẽ phân bổ pod lên một node nào đó. Bạn không cần biết pod nằm trên node nào, Kubernetes sẽ lo việc đó cho bạn.
 
-```console
+```shell
 $ kubectl get pods
 NAME                        READY     STATUS    RESTARTS   AGE
 minecraft-927348482-rznvq   1/1       Running   0          2d
@@ -95,7 +95,7 @@ spec:
 
 Sau khi tạo file yaml, bạn có thể tạo các resource trên kubernetes như sau. Để biết chi tiết hơn, hãy xem [hướng dẫn này](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough "‌").
 
-```console
+```shell
 kubectl create -f azure-vote.yaml
 ```
 

@@ -21,7 +21,7 @@ Một số nguyên nhân có thể dẫn đến thất bại là
 
 Nếu bạn nhận được kết quả sau khi kiểm tra pod:
 
-```console
+```shell
 $ kubectl get pods
   NAME                                READY   STATUS    RESTARTS   AGE
   hashgenerator-dep-cdcc6d567-jd8jr   0/1     Pending   0          43s
@@ -29,7 +29,7 @@ $ kubectl get pods
 
 Hãy kiểm tra "Events" của pod đó bằng lệnh `describe`. Nếu các sự kiện (events) bao gồm thông báo sau thì vấn đề là do thiếu dung lượng.
 
-```console
+```shell
 $ kubectl describe pod hashgenerator-dep-cdcc6d567-jd8jr
   (...)
   Events:

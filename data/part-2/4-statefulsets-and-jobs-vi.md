@@ -283,7 +283,7 @@ spec:
 
 Apply file trên và kiểm tra pod đã chạy:
 
-```console
+```shell
 $ kubectl get po
   NAME                                READY   STATUS    RESTARTS   AGE
   postgres-ss-0                       1/1     Running   0          65s
@@ -310,7 +310,7 @@ spec:
 
 Pod có một số cấu hình sẵn có. Ví dụ, có thể ép nó thử lại nhiều lần bằng cách định nghĩa `backoffLimit`.
 
-```console
+```shell
 $ kubectl get jobs
   NAME     COMPLETIONS   DURATION   AGE
   backup   1/1           7s         35s

@@ -78,7 +78,7 @@ spec:
 
 Next, to test our manifests deploy this into our cluster. Above I had pushed the built image using `docker push`.
 
-```console
+```shell
 $ kubectl apply -f manifests/service.yaml
 $ kubectl apply -f manifests/deployment.yaml
 ```
@@ -103,7 +103,7 @@ resources:
 
 Now we can deploy this using the `-k` flag identifying that we want to use Kustomize.
 
-```console
+```shell
 $ kubectl apply -k .
 ```
 
@@ -131,7 +131,7 @@ containers:
 
 Test that everything works
 
-```console
+```shell
 $ kubectl kustomize .
   ...
     spec:
@@ -223,7 +223,7 @@ Give these roles to your service account:
 
 After creating a service account for GKE called "github-actions" I created the key using gcloud:
 
-```console
+```shell
 $ gcloud iam service-accounts keys create ./private-key.json --iam-account=github-actions@dwk-gke-331210.iam.gserviceaccount.com
 ```
 
@@ -372,7 +372,7 @@ What we'll want to do is deploy each branch into a separate namespace so that ea
 The namespace can be changed with kustomize:
 
 
-```console
+```shell
 kustomize edit set namespace ${GITHUB_REF#refs/heads/}
 ```
 
@@ -380,13 +380,13 @@ With this command, the namespace name will be equal to the branch name.
 
 If the namespace is not defined, the command causes an error, so we need to create it:
 
-```console
+```shell
 kubectl create namespace ${GITHUB_REF#refs/heads/} || true
 ```
 
 We also need to take the namespace to use with command:
 
-```console
+```shell
 kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
 ```
 
@@ -419,4 +419,3 @@ Improve the deployment so that each branch creates a separate environment. The m
 Finally, create a new workflow so that deleting a branch deletes the environment.
 
 </exercise>
-

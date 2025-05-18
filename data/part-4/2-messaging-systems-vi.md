@@ -52,7 +52,7 @@ Chart này có [tài liệu](https://artifacthub.io/packages/helm/bitnami/nats) 
 
 Tham số có thể được đặt khi cài đặt như sau:
 
-```console
+```shell
 $ helm install --set auth.enabled=false my-nats oci://registry-1.docker.io/bitnamicharts/nats
 
   NAME: my-nats
@@ -238,7 +238,7 @@ Chúng ta cần thêm label phù hợp để Prometheus biết lắng nghe NATS.
 
 Hãy dùng label mà các ServiceMonitor hiện có đang dùng. Kiểm tra bằng lệnh:
 
-```console
+```shell
 $ kubectl -n prometheus get prometheus
   NAME                                    VERSION   REPLICAS   AGE
   kube-prometheus-stack-1714-prometheus   v2.51.2   1          39h
@@ -261,7 +261,7 @@ kubectl label servicemonitors.monitoring.coreos.com -n prometheus my-nats-metric
 
 Bây giờ Prometheus sẽ truy cập được dữ liệu mới. Kiểm tra Prometheus:
 
-```console
+```shell
 $ kubectl -n prometheus port-forward prometheus-kube-prometheus-stack-1714-prometheus-0 9090
 Forwarding from 127.0.0.1:9090 -> 9090
 Forwarding from [::1]:9090 -> 9090
@@ -277,7 +277,7 @@ Bây giờ có thể truy vấn dữ liệu:
 
 API của Prometheus cũng sẽ trả về kết quả:
 
-```console
+```shell
 $ curl http://localhost:9090/api/v1/query\?query\=gnatsd_connz_in_msgs
   {
     "status":"success",
@@ -310,7 +310,7 @@ Nếu kết quả ở đây rỗng, thì có gì đó sai. Kết quả có thể
 
 Bây giờ chỉ cần thêm dashboard Grafana cho dữ liệu này. Hãy import dashboard từ [đây](https://raw.githubusercontent.com/nats-io/prometheus-nats-exporter/5084a32850823b59069f21f3a7dde7e488fef1c6/walkthrough/grafana-nats-dash.json) thay vì tự cấu hình.
 
-```console
+```shell
 $ kubectl -n prometheus port-forward kube-prometheus-stack-1602180058-grafana-59cd48d794-4459m 3000
 ```
 

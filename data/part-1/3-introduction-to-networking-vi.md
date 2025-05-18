@@ -22,7 +22,7 @@ Hãy phát triển ứng dụng của chúng ta sao cho nó có một máy chủ
 
 Tôi đã chuẩn bị sẵn một ví dụ [tại đây](https://github.com/kubernetes-hy/material-example/tree/master/app2). Mặc định, nó sẽ lắng nghe ở cổng 3000.
 
-```console
+```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app2/manifests/deployment.yaml
   deployment.apps/hashresponse-dep được tạo
 ```
@@ -31,7 +31,7 @@ $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-hy/material-exam
 
 Chúng ta có thể xác nhận rằng hashresponse-dep đang hoạt động bằng lệnh `port-forward`. Hãy xem tên của pod trước rồi chuyển tiếp cổng đến đó:
 
-```console
+```shell
 $ kubectl get po
   NAME                                READY   STATUS    RESTARTS   AGE
   hashgenerator-dep-5cbbf97d5-z2ct9   1/1     Running   0          20h
@@ -62,7 +62,7 @@ Vì chúng ta đang chạy cụm bên trong Docker với k3d nên sẽ cần m�
 
 Mở một đường dẫn từ bên ngoài cụm đến pod sẽ không đủ nếu chúng ta không có cách truy cập vào cụm bên trong các container!
 
-```console
+```shell
 $ docker ps
   CONTAINER ID    IMAGE                      COMMAND                  CREATED             STATUS              PORTS                             NAMES
   b60f6c246ebb    ghcr.io/k3d-io/k3d-proxy:5 "/bin/sh -c nginx-pr…"   2 giờ trước         Đang chạy 2 giờ     80/tcp, 0.0.0.0:58264->6443/tcp   k3d-k3s-default-serverlb
@@ -75,7 +75,7 @@ Kéo sang phải một chút, chúng ta thấy K3d đã chuẩn bị sẵn cổn
 
 Tài liệu [K3d](https://k3d.io/v5.3.0/usage/commands/k3d_cluster_create/) cho biết cách mở cổng, chúng ta sẽ mở cổng local 8081 tới 80 ở k3d-k3s-default-serverlb và local 8082 tới 30080 ở k3d-k3s-default-agent-0. Cổng 30080 được chọn gần như ngẫu nhiên, nhưng cần nằm trong khoảng 30000-32767 cho bước tiếp theo:
 
-```console
+```shell
 $ k3d cluster delete
   INFO[0000] Đang xóa cụm 'k3s-default'
   ...
@@ -136,7 +136,7 @@ spec:
       targetPort: 3000 # Đây là cổng đích
 ```
 
-```console
+```shell
 $ kubectl apply -f manifests/service.yaml
   service/hashresponse-svc được tạo
 ```
@@ -163,7 +163,7 @@ Ingress được triển khai bởi nhiều "controller" khác nhau. Điều nà
 
 Chuyển sang Ingress sẽ yêu cầu tạo một tài nguyên Ingress. Ingress sẽ định tuyến lưu lượng đến _Service_, nhưng Service kiểu _NodePort_ cũ sẽ không dùng được.
 
-```console
+```shell
 $ kubectl delete -f manifests/service.yaml
   service "hashresponse-svc" đã bị xóa
 ```
@@ -216,7 +216,7 @@ spec:
 
 Sau đó chúng ta có thể apply tất cả và xem kết quả
 
-```console
+```shell
 $ kubectl apply -f manifests/
   ingress.networking.k8s.io/dwk-material-ingress được tạo
   service/hashresponse-svc đã được cấu hình

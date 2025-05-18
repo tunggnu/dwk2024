@@ -24,7 +24,7 @@ Let's use [pixabay](https://pixabay.com/) to display images on a simple web app.
 
 The app manifests are [here](https://github.com/kubernetes-hy/material-example/tree/master/app4/manifests). Let us start up the app with a service and an ingress:
 
-```console
+```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app4/manifests/deployment.yaml \
                 -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app4/manifests/ingress.yaml \
                 -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app4/manifests/service.yaml
@@ -170,7 +170,7 @@ If we want to encrypt a file for the whole team, we will need to add a list of p
 
 You can decrypt the encrypted file by exporting the key file in *SOPS\_AGE\_KEY\_FILE* environment variable and running sops with --decrypt flag.
 
-```console
+```shell
 $ export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
 
 $ sops --decrypt secret.enc.yaml > secret.yaml
@@ -178,7 +178,7 @@ $ sops --decrypt secret.enc.yaml > secret.yaml
 
 You can also apply a secret yaml via piping directly, this helps avoid creating a plain secret.yaml file:
 
-```console
+```shell
 $ sops --decrypt secret.enc.yaml | kubectl apply -f -
 ```
 
@@ -229,7 +229,7 @@ Create a ConfigMap for the "Log output" application. The ConfigMap should define
 The app should map the file as a volume, set the environment variable and print the content of those in addition to the usual output:
 
 
-```plaintext
+```text
 file content: this text is from file
 env variable: MESSAGE=hello world
 2024-03-30T12:15:17.705Z: 8523ecb1-c716-4cb6-a044-b9e83bb98e43.
@@ -237,4 +237,3 @@ Ping / Pongs: 3
 ```
 
 </exercise>
-

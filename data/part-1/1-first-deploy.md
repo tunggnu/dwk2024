@@ -76,13 +76,13 @@ We'll use k3d to create a group of Docker containers that run k3s. The installat
 
 Because the nodes are containers we are going to need to do a little bit of configuring to get those working like we want. We will get to that later. Creating our very own Kubernetes cluster with k3d is done by a single command.
 
-```console
+```shell
 $ k3d cluster create -a 2
 ```
 
 This created a Kubernetes cluster with 2 agent nodes. As they're in Docker you can confirm that they exist with `docker ps`.
 
-```console
+```shell
 $ docker ps
   CONTAINER ID   IMAGE                            COMMAND                  CREATED          STATUS          PORTS                             NAMES
   b25a9bb6c42f   ghcr.io/k3d-io/k3d-tools:5.4.1   "/app/k3d-tools noop"    56 seconds ago   Up 55 seconds                                     k3d-k3s-default-tools
@@ -100,7 +100,7 @@ The other tool that we will be using in this course is [kubectl](https://kuberne
 
 Now kubectl will be able to access the cluster
 
-```console
+```shell
 $ kubectl cluster-info
   Kubernetes control plane is running at https://0.0.0.0:50122
   CoreDNS is running at https://0.0.0.0:50122/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
@@ -111,7 +111,7 @@ We can see that kubectl is connected to the container _k3d-k3s-default-serverlb_
 
 If you want to stop / start the cluster you can simply run
 
-```console
+```shell
 $ k3d cluster stop
   INFO[0000] Stopping cluster 'k3s-default'
   INFO[0011] Stopped cluster 'k3s-default'
@@ -161,7 +161,7 @@ Now we are finally ready to deploy our first app into Kubernetes!
 
 To deploy an application, we will need to create a [deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) object with the image.
 
-```console
+```shell
 $ kubectl create deployment hashgenerator-dep --image=jakousa/dwk-app1
   deployment.apps/hashgenerator-dep created
 ```
@@ -180,7 +180,7 @@ Reading through the documentation or searching the internet are not the only way
 
 For example, to get a description of what a Pod is and its mandatory fields, we can use the following command.
 
-```console
+```shell
 $ kubectl explain pod
   KIND:     Pod
   VERSION:  v1
@@ -206,7 +206,7 @@ While we created the Deployment we also created a [ReplicaSet](https://kubernete
 
 You can view the deployments as follows:
 
-```console
+```shell
 $ kubectl get deployments
   NAME                READY   UP-TO-DATE   AVAILABLE   AGE
   hashgenerator-dep   1/1     1            1           54s
@@ -228,7 +228,7 @@ A helpful list for other commands from docker-cli translated to kubectl is avail
 
 Create an application that generates a random string on startup, stores this string into memory, and outputs it every 5 seconds with a timestamp. e.g.
 
-```plaintext
+```text
 2020-03-30T12:15:17.705Z: 8523ecb1-c716-4cb6-a044-b9e83bb98e43
 2020-03-30T12:15:22.705Z: 8523ecb1-c716-4cb6-a044-b9e83bb98e43
 ```
@@ -263,13 +263,13 @@ Create a web server that outputs "Server started in port NNNN" when it is starte
 
 We created the deployment with
 
-```console
+```shell
 $ kubectl create deployment hashgenerator-dep --image=jakousa/dwk-app1
 ```
 
 If we wanted to scale it 4 times and update the image:
 
-```console
+```shell
 $ kubectl scale deployment/hashgenerator-dep --replicas=4
 
 $ kubectl set image deployment/hashgenerator-dep dwk-app1=jakousa/dwk-app1:b7fc18de2376da80ff0cfc72cf581a9f94d10e64
@@ -279,7 +279,7 @@ Things start to get really cumbersome. It is hard to imagine how someone in thei
 
 Before redoing the previous steps via the declarative approach, let's take the existing deployment down.
 
-```console
+```shell
 $ kubectl delete deployment hashgenerator-dep
   deployment.apps "hashgenerator-dep" deleted
 ```
@@ -322,14 +322,14 @@ This looks a lot like the docker-compose.yaml files we have previously written. 
 
 Apply the deployment with `apply` command:
 
-```console
+```shell
 $ kubectl apply -f manifests/deployment.yaml
   deployment.apps/hashgenerator-dep created
 ```
 
 That's it, but for the sake of revision, let's delete it and create it again:
 
-```console
+```shell
 $ kubectl delete -f manifests/deployment.yaml
   deployment.apps "hashgenerator-dep" deleted
 
@@ -363,7 +363,7 @@ Note applying a new deployment won't update the application unless the tag is up
 
 Your basic workflow may look something like this:
 
-```console
+```shell
 $ docker build -t <image>:<new_tag>
 
 $ docker push <image>:<new_tag>
@@ -371,6 +371,6 @@ $ docker push <image>:<new_tag>
 
 Then edit deployment.yaml so that the tag is updated to the \<new_tag\> and run the following command
 
-```console
+```shell
 $ kubectl apply -f manifests/deployment.yaml
 ```

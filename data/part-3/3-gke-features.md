@@ -125,7 +125,7 @@ HorizontalPodAutoscaler automatically scales pods horizontally. The yaml here de
 
 Let us now try what happens:
 
-```console
+```shell
 $ kubectl top pod -l app=cpushredder
   NAME                               CPU(cores)   MEMORY(bytes)
   cpushredder-dep-85f5b578d7-nb5rs   1m           20Mi
@@ -141,7 +141,7 @@ $ kubectl get svc
 
 Opening the external-ip, above http://35.228.149.206, in your browser will start one process that will take some CPU. Refresh the page a few times and you should see that if you request above the limit the pod will be taken down.
 
-```console
+```shell
 $ kubectl logs -f cpushredder-dep-85f5b578d7-nb5rs
   Started in port 3001
   Received a request
@@ -186,7 +186,7 @@ Figuring out autoscaling with HorizontalPodAutoscalers can be one of the more ch
 
 Scaling nodes is a supported feature in GKE. Via the cluster autoscaling feature we can use the right number of nodes needed.
 
-```console
+```shell
 $ gcloud container clusters update dwk-cluster --zone=europe-north1-b --enable-autoscaling --min-nodes=1 --max-nodes=5
   Updated [https://container.googleapis.com/v1/projects/dwk-gke/zones/europe-north1-b/clusters/dwk-cluster].
   To inspect the contents of your cluster, go to: https://console.cloud.google.com/kubernetes/workload_/gcloud/europe-north1-b/dwk-cluster?project=dwk-gke
@@ -231,4 +231,3 @@ _Side note:_ Kubernetes also offers the possibility to limit resources per names
   Submit a picture of the logs when a new todo is created.
 
 </exercise>
-

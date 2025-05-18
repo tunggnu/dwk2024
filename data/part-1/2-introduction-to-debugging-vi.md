@@ -32,7 +32,7 @@ Hãy thử các công cụ này và thực hành với Lens. Bạn có thể s�
 
 Hãy triển khai ứng dụng và xem điều gì đang diễn ra.
 
-```console
+```shell
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-hy/material-example/master/app1/manifests/deployment.yaml
   deployment.apps/hashgenerator-dep created
 
@@ -74,7 +74,7 @@ Có rất nhiều thông tin mà chúng ta chưa sẵn sàng để đánh giá. 
 
 Lệnh `describe` cũng có thể dùng cho các tài nguyên khác. Hãy xem tiếp pod:
 
-```console
+```shell
 $ kubectl describe pod hashgenerator-dep-75bdcc94c-whwsm
   ...
   Events:
@@ -91,7 +91,7 @@ Lại có rất nhiều thông tin, nhưng lần này hãy tập trung vào ph�
 
 Tiếp theo, hãy kiểm tra xem ứng dụng thực sự có hoạt động đúng không bằng cách đọc log.
 
-```console
+```shell
 $ kubectl logs hashgenerator-dep-75bdcc94c-whwsm
   jst944
   3c2xas

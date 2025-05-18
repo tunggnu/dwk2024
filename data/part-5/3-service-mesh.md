@@ -37,7 +37,7 @@ Linkerd has a CLI tool to help us, follow now the [getting started](https://link
 
 Let's look at our application, this time we'll use this microservice application for voting emojis: [https://github.com/BuoyantIO/emojivoto](https://github.com/BuoyantIO/emojivoto).
 
-```console
+```shell
 $ kubectl apply -f https://raw.githubusercontent.com/BuoyantIO/emojivoto/main/kustomize/deployment/ns.yml \
                 -f https://raw.githubusercontent.com/BuoyantIO/emojivoto/main/kustomize/deployment/web.yml \
                 -f https://raw.githubusercontent.com/BuoyantIO/emojivoto/main/kustomize/deployment/emoji.yml \
