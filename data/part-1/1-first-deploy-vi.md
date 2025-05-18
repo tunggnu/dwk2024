@@ -42,7 +42,7 @@ Bạn sẽ phải bắt đầu bằng việc quyết định 2 tiến trình nà
 
 Sẽ thế nào nếu bạn chỉ cần định nghĩa "Tiến trình này nên có 6 bản sao sử dụng X lượng tài nguyên." và có 2..N máy tính hoạt động như một thực thể duy nhất để đáp ứng yêu cầu của bạn? Đó chỉ là một trong những điều mà Kubernetes làm được.
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Về bản chất, Kubernetes là tổng hợp tất cả các bash script và các best practice mà hầu hết các quản trị viên hệ thống sẽ tự xây dựng theo thời gian, được trình bày như một hệ thống duy nhất phía sau một tập hợp API khai báo.</p>&mdash; Kelsey Hightower (@kelseyhightower) <a href="https://twitter.com/kelseyhightower/status/1125440400355782657?ref_src=twsrc%5Etfw">Ngày 6 tháng 5, 2019</a></blockquote>
+<blockquote><p lang="en" dir="ltr">Về bản chất, Kubernetes là tổng hợp tất cả các bash script và các best practice mà hầu hết các quản trị viên hệ thống sẽ tự xây dựng theo thời gian, được trình bày như một hệ thống duy nhất phía sau một tập hợp API khai báo.</p>&mdash; Kelsey Hightower (@kelseyhightower) <a href="https://twitter.com/kelseyhightower/status/1125440400355782657?ref_src=twsrc%5Etfw">Ngày 6 tháng 5, 2019</a></blockquote>
 
 Hoặc chính thức hơn:
 

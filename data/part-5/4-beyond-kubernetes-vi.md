@@ -16,7 +16,7 @@ Sau phần này bạn có thể
 
 Cuối cùng, vì Kubernetes là một nền tảng, chúng ta sẽ điểm qua một số thành phần xây dựng phổ biến sử dụng Kubernetes.
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Kubernetes là một nền tảng để xây dựng các nền tảng khác. Nó là điểm khởi đầu tốt hơn; không phải là đích đến cuối cùng.</p>&mdash; Kelsey Hightower (@kelseyhightower) <a href="https://twitter.com/kelseyhightower/status/935252923721793536?ref_src=twsrc%5Etfw">November 27, 2017</a></blockquote>
+<blockquote><p lang="en" dir="ltr">Kubernetes là một nền tảng để xây dựng các nền tảng khác. Nó là điểm khởi đầu tốt hơn; không phải là đích đến cuối cùng.</p>&mdash; Kelsey Hightower (@kelseyhightower) <a href="https://twitter.com/kelseyhightower/status/935252923721793536?ref_src=twsrc%5Etfw">November 27, 2017</a></blockquote>
 
 [OpenShift](https://www.openshift.com/) là một Kubernetes "doanh nghiệp" ([Red Hat OpenShift Overview](https://developers.redhat.com/products/openshift/overview)). Nói rằng bạn không có Kubernetes vì bạn dùng OpenShift cũng giống như nói ["Tôi không có động cơ. Tôi có một chiếc xe hơi!"](https://www.openshift.com/blog/enterprise-kubernetes-with-openshift-part-one). Để xem các lựa chọn Kubernetes sẵn sàng cho sản xuất khác, hãy xem [Rancher](https://rancher.com/), có thể bạn đã thấy ở trang này [https://github.com/rancher/k3d](https://github.com/rancher/k3d), và [Anthos GKE](https://cloud.google.com/anthos/gke), nghe cũng quen thuộc. Tất cả đều là các lựa chọn khi bạn phải quyết định chọn bản phân phối Kubernetes nào hoặc muốn dùng dịch vụ được quản lý.
 
