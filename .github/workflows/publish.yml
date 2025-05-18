@@ -31,4 +31,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          # cname: devopswithkubernetes.com
+          cname: dwk2024.tomnguyen.site
