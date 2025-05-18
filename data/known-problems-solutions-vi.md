@@ -1,5 +1,5 @@
 ---
-path: "/known-problems-solutions"
+path: "/known-problems-solutions-vi"
 title: "Các vấn đề bạn có thể gặp phải"
 hidden: false
 information_page: true
